@@ -2,9 +2,11 @@
 
 // @name         Script - Botões extras para videos na web - feito para pc 
 
-// @namespace https://github.com/rokurozz/ScriptWebVideos
+// @namespace https://github.com/rokurozz/ScriptWebVideosPC
 
 // @version      1.0.0
+
+// @author       rokurozz
 
 // @updateURL    https://raw.githubusercontent.com/rokurozz/ScriptWebVideosPC/PC/script.user.js
 
