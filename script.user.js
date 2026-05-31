@@ -4,7 +4,7 @@
 
 // @namespace https://github.com/rokurozz/ScriptWebVideosPC
 
-// @version      1.0.0
+// @version      1.0.1
 
 // @author       rokurozz
 
