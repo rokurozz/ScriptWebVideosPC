@@ -1,25 +1,14 @@
 // ==UserScript==
-
 // @name         Script - Botões extras para videos na web - feito para pc 
-
 // @namespace https://github.com/rokurozz/ScriptWebVideosPC
-
 // @version      1.0.2
-
 // @author       rokurozz
-
 // @updateURL    https://raw.githubusercontent.com/rokurozz/ScriptWebVideosPC/PC/script.user.js
-
 // @downloadURL  https://raw.githubusercontent.com/rokurozz/ScriptWebVideosPC/PC/script.user.js
-
 // @description  adiciona alguns botões extras sobre o video na web com salvamento de progresso automático e configuravél via menu pelo usuário
-
 // @match        *://*/*
-
 // @grant        GM_setValue
-
 // @grant        GM_getValue
-
 // ==/UserScript==
 
 (function(){'use strict';const dbPromise=new Promise((resolve,reject)=>{const request=indexedDB.open('PlayerPCDB',1);request.onupgradeneeded=()=>{const db=request.result;if(!db.objectStoreNames.contains('progress')){db.createObjectStore('progress')}};request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error)});const storage={async setProgress(key,value){const db=await dbPromise;const tx=db.transaction('progress','readwrite');tx.objectStore('progress').put({time:value,lastUpdate:Date.now()},key)},async getProgress(key){const db=await dbPromise;return new Promise((resolve)=>{const tx=db.transaction('progress','readonly');const request=tx.objectStore('progress').get(key);request.onsuccess=()=>{const data=request.result;if(data&&typeof data==='object'){resolve(data.time??0)}else if(typeof data==='number'){resolve(data)}else{resolve(0)}};request.onerror=()=>resolve(0)})}};let smartCleanupDone=!1;async function runSmartCleanup(){if(!GM_getValue("config_smartCleanup",!1))return;if(smartCleanupDone)return;const db=await dbPromise;const tx=db.transaction('progress','readwrite');const store=tx.objectStore('progress');const now=Date.now();const threeDaysMs=3*24*60*60*1000;const keys=await new Promise(r=>{const req=store.getAllKeys();req.onsuccess=()=>r(req.result);req.onerror=()=>r([])});for(const key of keys){const data=await new Promise(r=>{const req=store.get(key);req.onsuccess=()=>r(req.result);req.onerror=()=>r(null)});if(data&&typeof data==='object'&&data.lastUpdate){if(now-data.lastUpdate>threeDaysMs){store.delete(key)}}}
