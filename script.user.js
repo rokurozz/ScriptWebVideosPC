@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Script - Botões extras para videos na web - feito para pc 
+// @name         Script - Botões extras sobre videos na web - funciona no PC e no Celular
 // @namespace https://github.com/rokurozz/ScriptWebVideosPC
-// @version      1.0.2
+// @version      1.0.3
 // @author       rokurozz
 // @updateURL    https://raw.githubusercontent.com/rokurozz/ScriptWebVideosPC/PC/script.user.js
 // @downloadURL  https://raw.githubusercontent.com/rokurozz/ScriptWebVideosPC/PC/script.user.js
